@@ -8,13 +8,14 @@ export default function Bebidas(props){
                     descricao1: "Água para toda semana", descricao2: "", valor: "30.00"}]
     
     return(
-        <div class="categoria bebidas" id="bebida">
+        <div className="categoria bebidas" id="bebida">
             <h1>Agora, sua bebida</h1>
-            <ul class="menu-categoria">
-            {itens.map(i => <Iten img={i.img} nomePrato={i.nomePrato} 
+            <ul className="menu-categoria">
+            {itens.map((i,j) => <Iten key={j} img={i.img} nomePrato={i.nomePrato} 
                                   descricao1={i.descricao1} descricao2={i.descricao2} 
                                   valor={i.valor}
-                                  funcaoSet={props.funcaoSetBebida} selecionado={props.bebidaSelecionado}/>)}
+                                  funcaoSet={props.funcaoSetBebida} selecionado={props.bebidaSelecionado}
+                                  quantidades={props.quantidades} setQuantidades={props.setQuantidades}/>)}
             </ul>
         </div>
     )

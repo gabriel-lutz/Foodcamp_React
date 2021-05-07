@@ -5,29 +5,52 @@ export default function Iten(props){
     function selecionar(){
         setContador(contador+1)
         props.funcaoSet(props.selecionado + parseFloat(props.valor))
+        props.setQuantidades([...props.quantidades, props.nomePrato])
+    }
 
-        //sempre que houver adição set valorTotal(criado no APP)+props.valor 
+    function subtrair(){
+        if(contador>0){
+            setContador(contador-1)
+        }
+        props.funcaoSet(props.selecionado - parseFloat(props.valor))
+        const arraySemSelecionado = removeIten()
+        props.setQuantidades([...arraySemSelecionado])
+    }
 
-        //sempre que houver subtração set valorTotal(criado no APP)-props.valor
+    function removeIten(){
+        let flag = false
+        return props.quantidades.filter((i)=>{
+            for(let j=0; j<props.quantidades.length;j++){
+                if(flag===false && props.nomePrato === i){
+                    flag=true
+                    return false
+                }
+            }
+            return true;
+        })
+    }
+
+    function adicionar(){
+        setContador(contador+1)
+        props.funcaoSet(props.selecionado + parseFloat(props.valor))
+        props.setQuantidades([...props.quantidades, props.nomePrato])
     }
 
     return(
-        <li class={(contador>0)? "item borda":"item"} onClick={() => {if(contador===0){selecionar()}}}>
+        <li className={(contador>0)? "item borda":"item"} onClick={() => {if(contador===0){selecionar()}}}>
             <img src={props.img} alt={props.nomePrato}/>
-            <div class="informacoes">
-                <p class="nome-prato">{props.nomePrato}</p>
-                <p class="descricao">{props.descricao1}</p>
-                <p class="descricao">{props.descricao2}</p>
-                <div class="valor-box">
-                    <p>R$</p><p class="valor">{props.valor}</p>
+            <div className="informacoes">
+                <p className="nome-prato">{props.nomePrato}</p>
+                <p className="descricao">{props.descricao1}</p>
+                <p className="descricao">{props.descricao2}</p>
+                <div className="valor-box">
+                    <p>R$</p><p className="valor">{props.valor}</p>
                 </div>
             </div>
-            <div class="contador">
-                <ion-icon class="subtrair" name="remove-outline" onClick={()=> {if(contador>0){setContador(contador-1)}
-                                                                                props.funcaoSet(props.selecionado - parseFloat(props.valor))}}></ion-icon>
+            <div className="contador">
+                <ion-icon className="subtrair" name="remove-outline" onClick={subtrair} ></ion-icon>
                 <p>{contador}</p>
-                <ion-icon class="adicionar" name="add-outline" onClick={()=> {setContador(contador+1)
-                                                                                props.funcaoSet(props.selecionado + parseFloat(props.valor))}}></ion-icon>
+                <ion-icon className="adicionar" name="add-outline" onClick={adicionar}></ion-icon>
             </div>
         </li>
     )

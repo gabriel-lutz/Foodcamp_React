@@ -6,13 +6,14 @@ export default function Sobremesas(props){
                     descricao1: "1 unidade", descricao2: "", valor: "3.00"}]
     
     return(
-        <div class="categoria sobremesas" id="sobremesa">
+        <div className="categoria sobremesas" id="sobremesa">
             <h1>Por fim, sua sobremesa</h1>
-            <ul class="menu-categoria">
-                {itens.map(i => <Iten img={i.img} nomePrato={i.nomePrato} 
+            <ul className="menu-categoria">
+                {itens.map((i,j) => <Iten key={j} img={i.img} nomePrato={i.nomePrato} 
                                       descricao1={i.descricao1} descricao2={i.descricao2} 
                                       valor={i.valor}
-                                      funcaoSet={props.funcaoSetSobremesa} selecionado={props.sobremesaSelecionado}  />)}
+                                      funcaoSet={props.funcaoSetSobremesa} selecionado={props.sobremesaSelecionado} 
+                                      quantidades={props.quantidades} setQuantidades={props.setQuantidades}/>)}
             </ul>
         </div>
     )

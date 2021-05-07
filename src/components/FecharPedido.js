@@ -1,7 +1,6 @@
 import React from "react"
 export default function FecharPedido(props){
     let habilitar = (props.prato !==0 && props.bebida!==0 && props.sobremesa !== 0)
-    const [qtd, setQtd] = React.useState([])
     const [mensagem, setMensagem] = React.useState()
     
     function listaQtdPedidos(){
@@ -19,7 +18,6 @@ export default function FecharPedido(props){
              }
         })
         const arrayFiltrada=filtraRepetidos(array)
-        setQtd([...arrayFiltrada])
         montarMsg(arrayFiltrada)  
     }
 
@@ -43,7 +41,6 @@ export default function FecharPedido(props){
         setMensagem(mensagem)
         }
        
-
     function filtraRepetidos(array){
         const filtrados=[]
         const resultado = array.filter((item)=>{
@@ -61,16 +58,12 @@ export default function FecharPedido(props){
         return resultado
     }
 
-
-
-
-
     if(habilitar){
         return(
             <div className="rodape">
                 <a href={`https://wa.me/?text=${mensagem}`}>
                 <div className="msg ativar" onClick={listaQtdPedidos}>
-                    <p>Tudo certo, pode pedir!</p>
+                    <p>Fechar Pedido</p>
                 </div>
                 </a>
             </div>
@@ -78,9 +71,8 @@ export default function FecharPedido(props){
     } else{
         return(
                 <div className="rodape">
-                    <div className="msg" onClick={listaQtdPedidos}>
+                    <div className="msg">
                         <p>Selecione os 3 itens para fechar o pedido</p>
-                        {qtd}
                     </div>
                 </div>
             )
